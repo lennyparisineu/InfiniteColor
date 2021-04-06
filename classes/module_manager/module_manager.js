@@ -13,8 +13,6 @@ class ModuleManager {
         new Block(BLOCK_SIZE * 1, canvas.clientHeight / 2 + BLOCK_SIZE),
         new Block(BLOCK_SIZE * 2, canvas.clientHeight / 2 + BLOCK_SIZE),
         new Block(BLOCK_SIZE * 3, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 4, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 5, canvas.clientHeight / 2 + BLOCK_SIZE),
       ],
       7
     );
@@ -22,9 +20,9 @@ class ModuleManager {
     this.pool.push(floor);
     this.activeModules = [
       this.pool[0].copy(),
-      // this.pool[0].copy().placeAtX(BLOCK_SIZE * 5),
-      // this.pool[0].copy().placeAtX(BLOCK_SIZE * 10),
-      // this.pool[0].copy().placeAtX(BLOCK_SIZE * 15),
+      this.pool[0].copy().placeAtX(BLOCK_SIZE * 5),
+      this.pool[0].copy().placeAtX(BLOCK_SIZE * 10),
+      this.pool[0].copy().placeAtX(BLOCK_SIZE * 15),
     ];
   }
 

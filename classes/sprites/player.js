@@ -34,4 +34,11 @@ class Player extends Block {
 
     return false;
   }
+
+  jump() {
+    if (this.jumpsLeft > 0) {
+      this.velocity = PLAYER_JUMP_SPEED;
+      --this.jumpsLeft;
+    }
+  }
 }

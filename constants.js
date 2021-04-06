@@ -4,3 +4,4 @@ let GRAVITY = -1;
 let PLATFORM_SPEED = 5;
 let MAX_JUMPS = 2;
 let OUTLINE_ONLY = true;
+let PLAYER_JUMP_SPEED = 15;

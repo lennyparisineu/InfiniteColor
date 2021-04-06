@@ -11,6 +11,7 @@ const moduleManager = new ModuleManager(canvas.clientWidth);
 let gameIsOver = false;
 
 window.setInterval(renderScreen, REFRESH_RATE);
+document.onkeydown = checkKey;
 
 function renderScreen() {
   if (!gameIsOver) {
@@ -28,5 +29,7 @@ function checkKey(e) {
   e = e || window.event;
   if (e.keyCode == "37" || e.keyCode == "65") {
   } else if (e.keyCode == "39" || e.keycode == "68") {
+  } else if (e.keyCode == "32") {
+    player.jump();
   }
 }
