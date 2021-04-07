@@ -41,20 +41,4 @@ class Sprite {
   update(ctx) {
     throw new Error("Abstract method must be implemented");
   }
-
-  /**
-   * Determines if this sprite is fully inside the canvas.
-   *
-   * @param {number} xOffset how much to offset this sprite's x position by
-   * @returns {boolean} whether or not the sprite is fully within view
-   */
-  isInView(xOffset) {
-    let rightXPos = xOffset + this.x + this.width;
-    return (
-      rightXPos > 0 &&
-      rightXPos < SCREEN_WIDTH &&
-      this.y + this.height > 0 &&
-      this.y < SCREEN_HEIGHT
-    );
-  }
 }

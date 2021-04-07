@@ -3,16 +3,16 @@
  * As the module moves, all of its sprites are moved with it.
  *
  */
-class Module extends Sprite {
+class Module {
   /**
    * Constructs a module with the given sprites.
    *
    * @param {Sprite[]} sprites a list of sprites that this module holds
    */
   constructor(sprites) {
-    super(0);
+    this.x = 0;
     this.sprites = sprites;
-    this.type = TYPE.MODULE;
+    this.alreadyTriggeredModuleSpawn = false;
   }
 
   /**
@@ -29,7 +29,6 @@ class Module extends Sprite {
   /**
    * Did any of this module's sprites collide with the other sprite?
    *
-   * @override
    * @param {Sprite} otherSprite a sprite to check collisions for
    * @returns {Sprite} if it did collide with the other sprite, return the object that the other sprite collided with
    */
@@ -49,7 +48,6 @@ class Module extends Sprite {
    * 1. Moves the module back by constant PLATFORM_SPEED
    * 2. Renders all of its sprites (offset by this module's x position)
    *
-   * @override
    * @param {CanvasContext} ctx the canvas' context (used to draw)
    */
   update(ctx) {
@@ -64,8 +62,10 @@ class Module extends Sprite {
    * @returns {boolean} whether or not this module's sprites are completely out of view
    */
   isCompletelyOutOfView() {
+    let sprite;
     for (let i = 0; i < this.sprites.length; ++i) {
-      if (this.sprites[i].isInView(this.x)) {
+      sprite = this.sprites[i];
+      if (sprite.x + sprite.width > 0) {
         return false;
       }
     }
@@ -77,8 +77,10 @@ class Module extends Sprite {
    * @returns {boolean} whether or not this module's sprites are completely in view
    */
   isCompletelyInView() {
+    let sprite;
     for (let i = 0; i < this.sprites.length; ++i) {
-      if (!this.sprites[i].isInView(this.x)) {
+      sprite = this.sprites[i];
+      if (this.x + sprite.x + sprite.width > SCREEN_WIDTH) {
         return false;
       }
     }

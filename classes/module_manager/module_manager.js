@@ -9,7 +9,7 @@ class ModuleManager {
   constructor() {
     this.activeModules = [];
     this.initPool();
-    this.createStartingFloor();
+    this.createStartingFloor(5);
   }
 
   /**
@@ -44,18 +44,18 @@ class ModuleManager {
       new Block(BLOCK_SIZE * 8, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 9, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 10, canvas.clientHeight / 2 + BLOCK_SIZE),
+      new Block(BLOCK_SIZE * 11, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Spike(BLOCK_SIZE * 11, canvas.clientHeight / 2, COLOR.RED),
       new Block(BLOCK_SIZE * 12, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 13, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 14, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 15, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 16, canvas.clientHeight / 2 + BLOCK_SIZE),
-      new Spike(BLOCK_SIZE * 16, canvas.clientHeight / 2, COLOR.BLUE),
 
-      new Block(BLOCK_SIZE * 18, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 19, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 20, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 21, canvas.clientHeight / 2 + BLOCK_SIZE),
+      new Spike(BLOCK_SIZE * 20, canvas.clientHeight / 2, COLOR.BLUE),
       new Block(BLOCK_SIZE * 22, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 23, canvas.clientHeight / 2 + BLOCK_SIZE),
     ]);
@@ -68,9 +68,12 @@ class ModuleManager {
   /**
    * Creates a few floor modules to start the game off.
    */
-  createStartingFloor() {
-    for (let i = 0; i < 3; ++i) {
-      this.copyFromPool(0, BLOCK_SIZE * i * 8);
+  createStartingFloor(floors) {
+    let floor;
+    for (let i = 0; i < floors; ++i) {
+      floor = this.pool[0].copy().placeAtX(BLOCK_SIZE * i * 8);
+      if (i < floors - 1) floor.alreadyTriggeredModuleSpawn = true;
+      this.activeModules.push(floor);
     }
   }
 
@@ -78,11 +81,10 @@ class ModuleManager {
    * Copies a module from the pool and adds it into the game slightly offscreen.
    *
    * @param {number} i the index of the module to add to the game from the pool
+   * @param {number} x the x position to place the module at
    */
-  copyFromPool(i) {
-    this.activeModules.push(
-      this.pool[i].copy().placeAtX(SCREEN_WIDTH + BLOCK_SIZE)
-    );
+  copyFromPool(i, x) {
+    this.activeModules.push(this.pool[i].copy().placeAtX(x));
   }
 
   /**
@@ -101,6 +103,8 @@ class ModuleManager {
   /**
    * Calls the active modules' update function and adds/removes modules to/from the game.
    *
+   * TODO -- figure out best way to continuously spawn modules without overlap
+   *
    * @param {CanvasContext} ctx the canvas' context (for drawing)
    */
   updateActiveModules(ctx) {
@@ -110,11 +114,15 @@ class ModuleManager {
       module.update(ctx);
       if (module.isCompletelyOutOfView()) {
         this.activeModules.splice(i, 1);
+        console.log("Removing module " + i);
         --i;
       } else if (
         i == this.activeModules.length - 1 &&
+        !module.alreadyTriggeredModuleSpawn &&
         module.isCompletelyInView()
       ) {
+        console.log("Adding new module ");
+        module.alreadyTriggeredModuleSpawn = true;
         this.createModuleInstance();
       }
     }
@@ -165,8 +173,6 @@ class ModuleManager {
    */
   createModuleInstance() {
     let index = Math.round(Math.random() * (this.pool.length - 1));
-    let module = this.pool[index].copy();
-    module.placeAtX(SCREEN_WIDTH + BLOCK_SIZE);
-    this.activeModules.push(module);
+    this.copyFromPool(index, SCREEN_WIDTH + BLOCK_SIZE);
   }
 }
