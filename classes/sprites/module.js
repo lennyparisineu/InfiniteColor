@@ -1,16 +1,38 @@
+/**
+ * Represents a collection of sprites grouped together as one 'Module'.
+ * As the module moves, all of its sprites are moved with it.
+ *
+ */
 class Module extends Sprite {
-  constructor(sprites, totalWidth) {
-    super();
+  /**
+   * Constructs a module with the given sprites.
+   *
+   * @param {Sprite[]} sprites a list of sprites that this module holds
+   */
+  constructor(sprites) {
+    super(0);
     this.sprites = sprites;
-    this.totalWidth = totalWidth;
-    this.x = 0;
+    this.type = TYPE.MODULE;
   }
 
+  /**
+   * Places this module at the given x coordinate
+   *
+   * @param {number} x the x coordinate to place this module at
+   * @returns {Module} this
+   */
   placeAtX(x) {
     this.x = x;
     return this;
   }
 
+  /**
+   * Did any of this module's sprites collide with the other sprite?
+   *
+   * @override
+   * @param {Sprite} otherSprite a sprite to check collisions for
+   * @returns {Sprite} if it did collide with the other sprite, return the object that the other sprite collided with
+   */
   collidedWith(otherSprite) {
     let collision;
     for (let i = 0; i < this.sprites.length; ++i) {
@@ -22,6 +44,14 @@ class Module extends Sprite {
     return null;
   }
 
+  /**
+   * Gets called every frame. This method:
+   * 1. Moves the module back by constant PLATFORM_SPEED
+   * 2. Renders all of its sprites (offset by this module's x position)
+   *
+   * @override
+   * @param {CanvasContext} ctx the canvas' context (used to draw)
+   */
   update(ctx) {
     this.x -= PLATFORM_SPEED;
     for (let i = 0; i < this.sprites.length; ++i) {
@@ -29,6 +59,10 @@ class Module extends Sprite {
     }
   }
 
+  /**
+   * Are all of this module's sprites completely out of view?
+   * @returns {boolean} whether or not this module's sprites are completely out of view
+   */
   isCompletelyOutOfView() {
     for (let i = 0; i < this.sprites.length; ++i) {
       if (this.sprites[i].isInView(this.x)) {
@@ -38,16 +72,24 @@ class Module extends Sprite {
     return true;
   }
 
-  isPartiallyOutOfView() {
+  /**
+   * Are all of this module's sprites completely in view?
+   * @returns {boolean} whether or not this module's sprites are completely in view
+   */
+  isCompletelyInView() {
     for (let i = 0; i < this.sprites.length; ++i) {
-      if (!this.sprites[i].isInView()) {
-        return true;
+      if (!this.sprites[i].isInView(this.x)) {
+        return false;
       }
     }
-
-    return false;
+    return true;
   }
 
+  /**
+   * Creates a deep copy of this module.
+   *
+   * @returns {Module} the copy of this module
+   */
   copy() {
     let sprites = this.sprites.map((sprite) => {
       return Object.assign(
@@ -60,6 +102,6 @@ class Module extends Sprite {
         JSON.parse(JSON.stringify(sprite))
       );
     });
-    return new Module(sprites, this.totalWidth);
+    return new Module(sprites);
   }
 }

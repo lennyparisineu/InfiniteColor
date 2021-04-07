@@ -1,27 +1,38 @@
+/**
+ * Represents a basic block that the player can collide with (if they do not have the same color).
+ */
 class Block extends Sprite {
+  /**
+   * Constructs a Block at the given position with the given color and size of
+   * constant BLOCK_SIZE.
+   *
+   * @param {number} x starting x position
+   * @param {number} y starting y position
+   * @param {COLOR | undefined} color starting color
+   */
   constructor(x, y, color) {
-    super(x, y, BLOCK_SIZE, BLOCK_SIZE);
+    super(x, y, BLOCK_SIZE, BLOCK_SIZE, TYPE.BLOCK);
     this.color = color ? color : COLOR.DEFAULT;
   }
 
+  /**
+   * Renders this sprite onto the canvas.
+   *
+   * @param {CanvasContext} ctx the canvas' context (for drawing)
+   * @param {number} xOffset how much to offset this block's x position by
+   */
   render(ctx, xOffset) {
-    if (OUTLINE_ONLY) {
-      ctx.strokeStyle = "#FF0000";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.rect(this.x + xOffset, this.y, this.width, this.height);
-      ctx.stroke();
-    } else {
-      ctx.fillStyle = this.color;
-      ctx.fillRect(
-        this.x + xOffset + this.width / 2,
-        this.y - this.height / 2,
-        this.width,
-        this.height
-      );
-    }
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x + xOffset, this.y, this.width, this.height, TYPE.BLOCK);
   }
 
+  /**
+   * Did this sprite collide with the other sprite?
+   *
+   * @override
+   * @param {Sprite} otherSprite a sprite to check collisions for
+   * @returns {Sprite} if it did collide with the other sprite, return the object that the other sprite collided with
+   */
   collidedWith(otherSprite, xOffset) {
     if (
       otherSprite.x <= this.x + xOffset + this.width &&

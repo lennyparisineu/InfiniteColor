@@ -1,45 +1,107 @@
+/**
+ * Represents the player's block.
+ */
 class Player extends Block {
-  constructor(x, y) {
-    super(x, y, COLOR.RED);
+  /**
+   * Constructs a Player at the given position with a starting default color and size of
+   * constant BLOCK_SIZE.
+   *
+   * @param {number} x starting x position
+   * @param {number} y starting y position
+   * @param {number} maxY the max y value the player can be at before going out of bounds
+   */
+  constructor(x, y, maxY) {
+    super(x, y, COLOR.DEFAULT, TYPE.PLAYER);
     this.velocity = 0;
     this.acceleration = GRAVITY;
-    this.isGrounded = false;
     this.jumpsLeft = MAX_JUMPS;
+    this.isGrounded = false;
+    this.isDead = false;
+    this.maxY = maxY;
   }
 
+  /**
+   * Gets called every frame. This method:
+   * 1. Applies gravity if the player isn't grounded.
+   * 2. Checks to make sure the player is in bounds, and if he/she isnt, this.isDead is set to true.
+   * 3. Renders the player.
+   *
+   * @override
+   * @param {CanvasContext} ctx the canvas' context (used to draw)
+   */
   update(ctx) {
-    this.render(ctx, 0);
     if (!this.isGrounded) {
       this.fall();
     }
+
+    if (!this.isInView(0)) {
+      this.isDead = true;
+    }
+
+    this.render(ctx, 0);
   }
 
+  /**
+   * Makes the player fall by applying velocity to the y position, and incrementing velocity by acceleration.
+   */
   fall() {
     this.y -= this.velocity;
     this.velocity += this.acceleration;
   }
 
-  isOutOfBounds(maxY) {
-    return this.y >= maxY + this.height || this.x + this.width <= 0;
-  }
+  /**
+   * Gets called when this player collides with an obstacle.This method applies additional logic to determine
+   * if it shoudl count as a collision, and what to do if it does.
+   *
+   * @param {Sprite} obstacle the obstacle this player collided with
+   * @returns {boolean} whether or not the obstacle should count as a collision
+   */
+  onCollision(obstacle) {
+    // if the player's color does not match the obstacle, then it should likely count as a collision
+    if (!this.colorsAreDifferent(obstacle)) {
+      // if the obstacle is a killer, then kill the player
+      if (obstacle.type === TYPE.KILLER) {
+        this.isDead = true;
 
-  collidedWithObstacle(obstacle) {
-    if (obstacle.color == COLOR.DEFAULT || obstacle.color != this.color) {
-      if (this.y + this.height > obstacle.y + obstacle.height * 0.1) {
-        this.isGrounded = false;
-        this.x -= PLATFORM_SPEED;
-      } else {
-        this.y = obstacle.y - obstacle.height;
-        this.isGrounded = true;
-        this.velocity = 0;
-        this.jumpsLeft = MAX_JUMPS;
+        // otherwise if the obstacle is a platform
+      } else if (obstacle.type === TYPE.BLOCK) {
+        // TODO -- improve this
+        // if the top of the player is hitting the obstacle
+        if (this.y >= obstacle.y + obstacle.height - obstacle.height * 0.5) {
+          // the player is not teleported
+          this.isGrounded = false;
+          this.x -= PLATFORM_SPEED;
+          // if the bottom of the player is touching/inside of the obstacle
+        } else if (this.y + this.height <= obstacle.y + obstacle.height * 0.5) {
+          // fix the player's bottom to be the top of the obstacle
+          this.y = obstacle.y;
+          // make the player grounded
+          this.isGrounded = true;
+          // reset velocity to 0
+          this.velocity = 0;
+          // and reset jumpsLeft
+          this.jumpsLeft = MAX_JUMPS;
+        }
+        return true;
       }
-      return true;
     }
 
     return false;
   }
 
+  /**
+   * Is this player's color different from the obstacle's?
+   *
+   * @param {Sprite} obstacle the obstacle to compare colors with
+   * @returns {boolean} whether or not the colors are different
+   */
+  colorsAreDifferent(obstacle) {
+    return obstacle.color !== COLOR.DEFAULT && obstacle.color === this.color;
+  }
+
+  /**
+   * Makes the player jump.
+   */
   jump() {
     if (this.jumpsLeft > 0) {
       this.velocity = PLAYER_JUMP_SPEED;
