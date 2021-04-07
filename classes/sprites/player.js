@@ -20,15 +20,20 @@ class Player extends Block {
   }
 
   isOutOfBounds(maxY) {
-    return this.y >= maxY + this.height;
+    return this.y >= maxY + this.height || this.x + this.width <= 0;
   }
 
   collidedWithObstacle(obstacle) {
     if (obstacle.color == COLOR.DEFAULT || obstacle.color != this.color) {
-      this.velocity = 0;
-      this.jumpsLeft = MAX_JUMPS;
-      this.isGrounded = true;
-      this.y = obstacle.y - obstacle.height;
+      if (this.y + this.height > obstacle.y + obstacle.height * 0.1) {
+        this.isGrounded = false;
+        this.x -= PLATFORM_SPEED;
+      } else {
+        this.y = obstacle.y - obstacle.height;
+        this.isGrounded = true;
+        this.velocity = 0;
+        this.jumpsLeft = MAX_JUMPS;
+      }
       return true;
     }
 
