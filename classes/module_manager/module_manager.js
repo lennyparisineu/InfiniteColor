@@ -103,8 +103,6 @@ class ModuleManager {
   /**
    * Calls the active modules' update function and adds/removes modules to/from the game.
    *
-   * TODO -- figure out best way to continuously spawn modules without overlap
-   *
    * @param {CanvasContext} ctx the canvas' context (for drawing)
    */
   updateActiveModules(ctx) {
