@@ -110,6 +110,9 @@ class ModuleManager {
     let collided = false;
     let collision;
 
+    // save temp ref to player's original Y
+    const playerY = player.y;
+
     // change it to the next update's potential location
     player.y -= player.velocity;
 
@@ -118,6 +121,10 @@ class ModuleManager {
       collision = this.activeModules[i].collidedWith(player);
       if (collision != null) {
         collided = player.onCollision(collision, this.activeModules[i].x);
+        // if a collision was truly detected, revert back to original position to prevent/reduce clipping
+        if (collided) {
+          player.y = playerY;
+        }
       }
     }
 
