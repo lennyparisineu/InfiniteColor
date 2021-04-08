@@ -9,7 +9,7 @@ const MAX_JUMPS = 2;
 const OUTLINE_ONLY = false;
 const PLAYER_JUMP_SPEED = 15;
 const BACKGROUND_IMAGE = "assets/background.png";
-const PLATFORM_BORDER_WIDTH = 3;
+const PLATFORM_BORDER_WIDTH = 4;
 
 // ========= ENUMS =========
 
@@ -17,26 +17,37 @@ const COLOR = Object.freeze({
   DEFAULT: {
     start: "#969696",
     end: "#6b6b6b",
-  },
-  WHITE: {
-    start: "#FFFFFF",
-    end: "#FFFFFF",
+    border: {
+      0: "#e1e1e1",
+      1: "#ffffff",
+    },
   },
   RED: {
-    start: "#FF0000",
-    end: "#FF0000",
+    start: "#ff6984",
+    end: "#ff0a0d",
+    border: {
+      0: "#ffffff",
+      0.5: "#dfdfdf",
+      1: "#ffffff",
+    },
   },
   GREEN: {
-    start: "#FFFFFF",
-    end: "#FFFFFF",
+    start: "#69ff86",
+    end: "#0aff31",
+    border: {
+      0: "#ffffff",
+      0.5: "#dfdfdf",
+      1: "#ffffff",
+    },
   },
   BLUE: {
-    start: "#0000FF",
-    end: "#0000FF",
-  },
-  BORDER: {
-    start: "#FF0000",
-    end: "#0000FF",
+    start: "#68d6ff",
+    end: "#0aa7ff",
+    border: {
+      0: "#ffffff",
+      0.5: "#dfdfdf",
+      1: "#ffffff",
+    },
   },
 });
 

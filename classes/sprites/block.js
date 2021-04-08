@@ -3,16 +3,39 @@
  */
 class Block extends Sprite {
   /**
-   * Constructs a Block at the given position with the given color and size of
+   * Constructs a Block at the given position with the size of
    * constant BLOCK_SIZE.
    *
    * @param {number} x starting x position
    * @param {number} y starting y position
-   * @param {COLOR | undefined} color starting color
    */
-  constructor(x, y, color) {
+  constructor(x, y) {
     super(x, y, BLOCK_SIZE, BLOCK_SIZE, TYPE.BLOCK);
-    this.color = color ? color : COLOR.DEFAULT;
+    this.color = COLOR.DEFAULT;
+  }
+
+  /**
+   * Sets the color of this block
+   *
+   * @param {COLOR} color sets this block's color
+   * @returns this
+   */
+  setColor(color) {
+    this.color = color;
+    return this;
+  }
+
+  /**
+   * Sets the dimensions of this block
+   *
+   * @param {number} width the new width
+   * @param {number} height the new height
+   * @returns this
+   */
+  setDimensions(width, height) {
+    this.width = width;
+    this.height = height;
+    return this;
   }
 
   /**
@@ -22,16 +45,29 @@ class Block extends Sprite {
    * @param {number} xOffset how much to offset this block's x position by
    */
   render(ctx, xOffset) {
-    let grd = ctx.createLinearGradient(0, 0, 0, this.height);
+    let grd = ctx.createLinearGradient(
+      this.x + xOffset,
+      this.y,
+      this.x + xOffset,
+      this.y + this.height
+    );
     grd.addColorStop(0, this.color.start);
     grd.addColorStop(1, this.color.end);
 
     ctx.fillStyle = grd;
-    ctx.save();
-    ctx.translate(this.x + xOffset, this.y);
-    ctx.fillRect(0, 0, this.width, this.height);
-    ctx.rect(0, 0, this.width, this.height);
-    ctx.restore();
+    ctx.fillRect(this.x + xOffset, this.y, this.width, this.height);
+    grd = ctx.createLinearGradient(
+      this.x + xOffset,
+      this.y,
+      this.x + xOffset,
+      this.y + this.height
+    );
+
+    let gradients = Object.keys(this.color.border);
+    gradients.forEach((x) => grd.addColorStop(x, this.color.border[x]));
+    ctx.strokeStyle = grd;
+    ctx.lineWidth = PLATFORM_BORDER_WIDTH;
+    ctx.strokeRect(this.x + xOffset, this.y, this.width, this.height);
   }
 
   /**

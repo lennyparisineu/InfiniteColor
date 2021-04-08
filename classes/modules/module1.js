@@ -10,7 +10,7 @@ const MODULE_1 = new Module([
   new Block(BLOCK_SIZE * 9, canvas.clientHeight / 2 + BLOCK_SIZE),
   new Block(BLOCK_SIZE * 10, canvas.clientHeight / 2 + BLOCK_SIZE),
   new Block(BLOCK_SIZE * 11, canvas.clientHeight / 2 + BLOCK_SIZE),
-  new Spike(BLOCK_SIZE * 11, canvas.clientHeight / 2, COLOR.RED),
+  new Spike(BLOCK_SIZE * 11, canvas.clientHeight / 2),
   new Block(BLOCK_SIZE * 12, canvas.clientHeight / 2 + BLOCK_SIZE),
   new Block(BLOCK_SIZE * 13, canvas.clientHeight / 2 + BLOCK_SIZE),
   new Block(BLOCK_SIZE * 14, canvas.clientHeight / 2 + BLOCK_SIZE),

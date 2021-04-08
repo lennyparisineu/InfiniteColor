@@ -22,13 +22,35 @@ class Spike extends Sprite {
    * @param {number} xOffset how much to offset this block's x position by
    */
   render(ctx, xOffset) {
-    ctx.fillStyle = this.color;
+    let grd = ctx.createLinearGradient(
+      this.x + xOffset,
+      this.y,
+      this.x + xOffset,
+      this.y + this.height
+    );
+    grd.addColorStop(0, this.color.start);
+    grd.addColorStop(1, this.color.end);
+    ctx.fillStyle = grd;
+
     ctx.beginPath();
     ctx.moveTo(this.x + xOffset, this.y + this.height);
     ctx.lineTo(this.x + xOffset + this.width / 2, this.y);
     ctx.lineTo(this.x + xOffset + this.width, this.y + this.height);
     ctx.closePath();
     ctx.fill();
+
+    grd = ctx.createLinearGradient(
+      this.x + xOffset,
+      this.y,
+      this.x + xOffset,
+      this.y + this.height
+    );
+
+    let gradients = Object.keys(this.color.border);
+    gradients.forEach((x) => grd.addColorStop(x, this.color.border[x]));
+    ctx.strokeStyle = grd;
+    ctx.lineWidth = PLATFORM_BORDER_WIDTH;
+    ctx.stroke();
   }
 
   // TODO -- fix this for better collision detection. Right now it's the same logic
