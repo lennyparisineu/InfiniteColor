@@ -29,6 +29,7 @@ function update() {
     // clear the screen
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
     ctx.clear;
+    drawBackground();
 
     // update the game
     moduleManager.update(ctx, player);
@@ -63,4 +64,23 @@ function checkKey(e) {
   if (e.keyCode == "32") {
     player.jump();
   }
+}
+
+let bg1x = 0;
+let bg2x = SCREEN_WIDTH;
+
+/**
+ * Draws the scrolling background
+ */
+function drawBackground() {
+  const image = document.getElementById("bg");
+  ctx.drawImage(image, bg1x, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+  ctx.drawImage(image, bg2x, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+  if (bg1x <= -SCREEN_WIDTH) {
+    bg1x = SCREEN_WIDTH - BACKGROUND_SCROLL_SPEED;
+  } else if (bg2x <= -SCREEN_WIDTH) {
+    bg2x = SCREEN_WIDTH - 2 * BACKGROUND_SCROLL_SPEED;
+  }
+  bg1x -= BACKGROUND_SCROLL_SPEED;
+  bg2x -= BACKGROUND_SCROLL_SPEED;
 }
