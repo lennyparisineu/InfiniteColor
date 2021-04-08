@@ -70,9 +70,11 @@ function parseLine(line, i) {
         out += `new Block(${xVal(x)}, ${yVal()}),`;
         break;
       case "c":
-        out += `new Block(${xVal(x)}, ${yVal(wallHeight + ` + BLOCK_SIZE`)})
+        out += `new Block(${xVal(x)}, ${yVal(wallHeight)})
                     .setRandomColor()
-                    .setDimensions(BLOCK_SIZE, ${wallHeight} ),`;
+                    .setDimensions(BLOCK_SIZE, ${wallHeight} ),new Block(${xVal(
+          x
+        )}, ${yVal()}),`;
         break;
       case "_":
         out += `new Block(${xVal(x)}, ${yVal(wallHeight + ` + BLOCK_SIZE`)})

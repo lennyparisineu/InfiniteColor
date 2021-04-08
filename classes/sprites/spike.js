@@ -64,19 +64,15 @@ class Spike extends Sprite {
    * @returns {Sprite} if it did collide with the other sprite, return the object that the other sprite collided with
    */
   collidedWith(otherSprite, xOffset) {
-    if (
-      otherSprite.x <= this.x + xOffset + this.width &&
-      otherSprite.x + otherSprite.width >= this.x + xOffset
-    ) {
-      let deltaX =
-        this.x + xOffset + this.width / 2 - (otherSprite.x + otherSprite.width);
+    let deltaX = Math.abs(
+      this.x + xOffset + this.width / 2 - (otherSprite.x + otherSprite.width)
+    );
 
-      let factor = deltaX / (this.width / 2);
-      let maxHeight = this.height * factor;
+    let factor = deltaX / (this.width / 2);
+    let maxHeight = this.height * factor;
 
-      if (otherSprite.y + otherSprite.height > this.y + maxHeight) {
-        return this;
-      }
+    if (otherSprite.y + otherSprite.height > this.y + maxHeight) {
+      return this;
     }
     return null;
   }
