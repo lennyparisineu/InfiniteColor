@@ -30,13 +30,26 @@ function update() {
   }
 }
 
+// dictionary that maps keys to colors that player can change into
+const keyColorDict = {
+  82: COLOR.RED, // r
+  71: COLOR.GREEN, // g
+  66: COLOR.BLUE, // b
+};
+
 // here is where we would process key input
 // TODO -- implement color changes based on key presses.
 function checkKey(e) {
   e = e || window.event;
-  if (e.keyCode == "37" || e.keyCode == "65") {
-  } else if (e.keyCode == "39" || e.keycode == "68") {
-  } else if (e.keyCode == "32") {
+
+  let keys = Object.keys(keyColorDict);
+  for (let i = 0; i < keys.length; ++i) {
+    if (e.keyCode === Number(keys[i])) {
+      player.color = keyColorDict[keys[i]];
+    }
+  }
+
+  if (e.keyCode == "32") {
     player.jump();
   }
 }
