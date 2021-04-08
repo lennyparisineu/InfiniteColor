@@ -2,14 +2,14 @@ const fs = require("fs");
 const readline = require("readline");
 let curLine = 0;
 let linesPerModule = 3;
-let dir = "../classes";
+let dir = "./classes";
 
 fs.unlinkSync(`${dir}/modules.js`);
 
 let fileStream = fs.createWriteStream(`${dir}/modules.js`, { flags: "a" });
 
 async function processLineByLine() {
-  const fileStream = fs.createReadStream("modules.txt");
+  const fileStream = fs.createReadStream("./scripts/modules.txt");
 
   const rl = readline.createInterface({
     input: fileStream,
