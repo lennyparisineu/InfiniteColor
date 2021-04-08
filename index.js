@@ -1,3 +1,11 @@
+/**
+ * BUGS:
+ *
+ * - Player sometimes gets stuck in block and does not fall or move to the left
+ * - Player sometimes doesn't completely lie on top of block (hovers over it)
+ * - Collision with spike is janky
+ */
+
 const canvas = document.getElementById("canvas");
 const SCREEN_WIDTH = canvas.clientWidth;
 const SCREEN_HEIGHT = canvas.clientHeight;

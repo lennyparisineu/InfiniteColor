@@ -23,17 +23,16 @@ class ModuleManager {
     // =================== cringe hard-code zone =============
     const floor = new Module(
       [
-        new Block(0, canvas.clientHeight / 2 + BLOCK_SIZE),
         new Block(BLOCK_SIZE * 1, canvas.clientHeight / 2 + BLOCK_SIZE),
         new Block(BLOCK_SIZE * 2, canvas.clientHeight / 2 + BLOCK_SIZE),
         new Block(BLOCK_SIZE * 3, canvas.clientHeight / 2 + BLOCK_SIZE),
         new Block(BLOCK_SIZE * 4, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Block(BLOCK_SIZE * 5, canvas.clientHeight / 2 + BLOCK_SIZE),
       ],
       7
     );
 
     const module1 = new Module([
-      new Block(BLOCK_SIZE * 0, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 1, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 2, canvas.clientHeight / 2 + BLOCK_SIZE),
       new Block(BLOCK_SIZE * 3, canvas.clientHeight / 2 + BLOCK_SIZE),
