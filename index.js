@@ -2,11 +2,10 @@
  * BUGS:
  *
  * - Player sometimes gets stuck in block and does not fall or move to the left
- * - Player sometimes doesn't completely lie on top of block (hovers over it)
  * - Collision with spike is janky
- * - Gap between collision
- * - If player lands directly on a corner of a platform, it counts as a 'right' col
- * - PLayer doesn't get pushed to the left since the bot collision takes priority?
+ * - Player will go through floor if going through a colored wall
+ * - Player randomly dies on module 16
+ * - Player can jump through colored walls without being same color
  */
 
 const canvas = document.getElementById("canvas");

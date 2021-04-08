@@ -106,6 +106,7 @@ class ModuleManager {
    */
   checkForPlayerCollisions(player) {
     let collided = false;
+    let collidedOnce = false;
     let collision;
 
     // save temp ref to player's original Y
@@ -119,6 +120,7 @@ class ModuleManager {
       collision = this.activeModules[i].collidedWith(player);
       if (collision != null) {
         collided = player.onCollision(collision, this.activeModules[i].x);
+        collidedOnce = true;
         // if a collision was truly detected, revert back to original position to prevent/reduce clipping
         if (collided) {
           player.y = playerY;
@@ -127,7 +129,7 @@ class ModuleManager {
     }
 
     // if there were no collisions
-    if (!collided) {
+    if (!collidedOnce) {
       // make the player fall and not be grounded
       player.isGrounded = false;
       player.y += player.velocity;

@@ -72,7 +72,7 @@ class Player extends Block {
    * @param {Sprite} obstacle the obstacle this player collided with
    * @returns {boolean} whether or not the obstacle should count as a collision
    */
-  onCollision(obstacle) {
+  onCollision(obstacle, xOffset) {
     // if the player's color does not match the obstacle, then it should likely count as a collision
     if (!this.colorsAreDifferent(obstacle)) {
       // if the obstacle is a killer, then kill the player
@@ -86,7 +86,7 @@ class Player extends Block {
         if (this.y >= obstacle.y + obstacle.height - obstacle.height * 0.5) {
           // the player is not teleported
           this.isGrounded = false;
-          this.x -= PLATFORM_SPEED;
+          this.x = obstacle.x + xOffset - this.width;
           // if the bottom of the player is touching/inside of the obstacle
         } else if (this.y + this.height <= obstacle.y + obstacle.height * 0.5) {
           // fix the player's bottom to be the top of the obstacle

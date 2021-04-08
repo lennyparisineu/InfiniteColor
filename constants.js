@@ -1,13 +1,13 @@
 // ========= VARS =========
 
 const BLOCK_SIZE = 60;
-const REFRESH_RATE = 50;
-const GRAVITY = -2;
+const REFRESH_RATE = 40;
+const GRAVITY = -3;
 const PLATFORM_SPEED = 15;
 const BACKGROUND_SCROLL_SPEED = PLATFORM_SPEED * 0.15;
 const MAX_JUMPS = 2;
 const OUTLINE_ONLY = false;
-const PLAYER_JUMP_SPEED = 20;
+const PLAYER_JUMP_SPEED = 26;
 const BACKGROUND_IMAGE = "assets/background.png";
 const PLATFORM_BORDER_WIDTH = 4;
 

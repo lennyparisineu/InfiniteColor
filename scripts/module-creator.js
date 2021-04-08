@@ -21,19 +21,21 @@ async function processLineByLine() {
   let modules = [];
   let module = [];
   for await (const line of rl) {
-    if (line.length > 0 && line[0] !== "#") {
+    if (line.length === 0 || line[0] !== "#") {
       if (curLine > 0 && curLine % linesPerModule === 0) {
         createModule(modules, module);
         module = [];
       }
-
       module.push(line);
       ++curLine;
+    } else {
+      console.log(line);
     }
   }
 
   createModule(modules, module);
   createModulesArray(modules);
+  console.log(`Created ${modules.length} modules.`);
 }
 
 async function createModule(modules, module) {
