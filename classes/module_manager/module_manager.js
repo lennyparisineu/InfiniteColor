@@ -34,7 +34,7 @@ class ModuleManager {
 
     // add the modules to the pool
     this.pool.push(floor);
-    // this.pool.push(MODULE_1);
+    this.pool.push(MODULE_1);
     this.pool.push(MODULE_3);
   }
 
