@@ -9,15 +9,35 @@ const MAX_JUMPS = 2;
 const OUTLINE_ONLY = false;
 const PLAYER_JUMP_SPEED = 15;
 const BACKGROUND_IMAGE = "assets/background.png";
+const PLATFORM_BORDER_WIDTH = 3;
 
 // ========= ENUMS =========
 
 const COLOR = Object.freeze({
-  DEFAULT: "#FFFFFF",
-  WHITE: "#FFFFFF",
-  RED: "#FF0000",
-  GREEN: "#00FF00",
-  BLUE: "#0000FF",
+  DEFAULT: {
+    start: "#969696",
+    end: "#6b6b6b",
+  },
+  WHITE: {
+    start: "#FFFFFF",
+    end: "#FFFFFF",
+  },
+  RED: {
+    start: "#FF0000",
+    end: "#FF0000",
+  },
+  GREEN: {
+    start: "#FFFFFF",
+    end: "#FFFFFF",
+  },
+  BLUE: {
+    start: "#0000FF",
+    end: "#0000FF",
+  },
+  BORDER: {
+    start: "#FF0000",
+    end: "#0000FF",
+  },
 });
 
 const TYPE = Object.freeze({

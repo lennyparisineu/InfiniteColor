@@ -22,8 +22,16 @@ class Block extends Sprite {
    * @param {number} xOffset how much to offset this block's x position by
    */
   render(ctx, xOffset) {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x + xOffset, this.y, this.width, this.height, TYPE.BLOCK);
+    let grd = ctx.createLinearGradient(0, 0, 0, this.height);
+    grd.addColorStop(0, this.color.start);
+    grd.addColorStop(1, this.color.end);
+
+    ctx.fillStyle = grd;
+    ctx.save();
+    ctx.translate(this.x + xOffset, this.y);
+    ctx.fillRect(0, 0, this.width, this.height);
+    ctx.rect(0, 0, this.width, this.height);
+    ctx.restore();
   }
 
   /**
