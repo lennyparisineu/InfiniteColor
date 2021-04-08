@@ -4,6 +4,8 @@
  * - Player sometimes gets stuck in block and does not fall or move to the left
  * - Player sometimes doesn't completely lie on top of block (hovers over it)
  * - Collision with spike is janky
+ * - Gap between collision
+ * - If player lands directly on a corner of a platform, it counts as a 'right' col
  */
 
 const canvas = document.getElementById("canvas");
