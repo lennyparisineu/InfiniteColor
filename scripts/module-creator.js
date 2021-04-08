@@ -70,12 +70,19 @@ function parseLine(line, i) {
         out += `new Block(${xVal(x)}, ${yVal()}),`;
         break;
       case "c":
-        out += `new Block(${xVal(x)}, ${yVal(wallHeight + `BLOCK_SIZE`)})
+        out += `new Block(${xVal(x)}, ${yVal(wallHeight + ` + BLOCK_SIZE`)})
                     .setRandomColor()
                     .setDimensions(BLOCK_SIZE, ${wallHeight} ),`;
         break;
+      case "_":
+        out += `new Block(${xVal(x)}, ${yVal(wallHeight + ` + BLOCK_SIZE`)})
+                      .setRandomColor()
+                      .setDimensions(BLOCK_SIZE, BLOCK_SIZE ),`;
+        break;
       case "^":
-        out += `new Spike(${xVal(x)}, ${yVal(`BLOCK_SIZE`)}),`;
+        out += `new Spike(${xVal(x)}, ${yVal(`BLOCK_SIZE`)}), new Block(${xVal(
+          x
+        )}, ${yVal()}),`;
         break;
       case "*":
         out += `new Spike(${xVal(x)}, ${yVal()}),`;
