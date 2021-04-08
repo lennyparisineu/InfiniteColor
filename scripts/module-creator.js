@@ -21,13 +21,15 @@ async function processLineByLine() {
   let modules = [];
   let module = [];
   for await (const line of rl) {
-    if (curLine > 0 && curLine % linesPerModule === 0) {
-      createModule(modules, module);
-      module = [];
-    }
+    if (line.length > 0 && line[0] !== "#") {
+      if (curLine > 0 && curLine % linesPerModule === 0) {
+        createModule(modules, module);
+        module = [];
+      }
 
-    module.push(line);
-    ++curLine;
+      module.push(line);
+      ++curLine;
+    }
   }
 
   createModule(modules, module);
@@ -57,20 +59,27 @@ function parseLine(line, i) {
   let curChar;
   const wallHeight = `BLOCK_SIZE * 5`;
   let xVal = (x) => `BLOCK_SIZE * ${x}`;
-  let yVal = (isWall) =>
+  let yVal = (offset) =>
     `(canvas.clientHeight / 2) - (BLOCK_SIZE) + (${i} * 2 * BLOCK_SIZE) ${
-      isWall ? `- ${wallHeight} + BLOCK_SIZE` : ""
+      offset ? `- ${offset}` : ""
     }`;
   for (let x = 0; x < line.length; ++x) {
     curChar = line[x];
     switch (curChar) {
       case "=":
-        out += `new Block(${xVal(x)}, ${yVal(false)}),`;
+        out += `new Block(${xVal(x)}, ${yVal()}),`;
         break;
       case "c":
-        out += `new Block(${xVal(x)}, ${yVal(true)})
+        out += `new Block(${xVal(x)}, ${yVal(wallHeight + `BLOCK_SIZE`)})
                     .setRandomColor()
                     .setDimensions(BLOCK_SIZE, ${wallHeight} ),`;
+        break;
+      case "^":
+        out += `new Spike(${xVal(x)}, ${yVal(`BLOCK_SIZE`)}),`;
+        break;
+      case "*":
+        out += `new Spike(${xVal(x)}, ${yVal()}),`;
+        break;
       default:
         break;
     }
