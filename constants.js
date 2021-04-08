@@ -23,8 +23,8 @@ const COLOR = Object.freeze({
     },
   },
   RED: {
-    start: "#ff6984",
-    end: "#ff0a0d",
+    start: "#ff6985",
+    end: "#ff090c",
     border: {
       0: "#ffffff",
       0.5: "#dfdfdf",
@@ -33,7 +33,7 @@ const COLOR = Object.freeze({
   },
   GREEN: {
     start: "#69ff86",
-    end: "#0aff31",
+    end: "#09ff30",
     border: {
       0: "#ffffff",
       0.5: "#dfdfdf",
@@ -41,8 +41,8 @@ const COLOR = Object.freeze({
     },
   },
   BLUE: {
-    start: "#68d6ff",
-    end: "#0aa7ff",
+    start: "#69d6ff",
+    end: "#09a7ff",
     border: {
       0: "#ffffff",
       0.5: "#dfdfdf",
