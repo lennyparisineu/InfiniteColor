@@ -65,7 +65,7 @@ class Module {
     let sprite;
     for (let i = 0; i < this.sprites.length; ++i) {
       sprite = this.sprites[i];
-      if (sprite.x + sprite.width > 0) {
+      if (sprite.x + sprite.width + this.x > 0) {
         return false;
       }
     }

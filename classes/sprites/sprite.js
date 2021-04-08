@@ -41,4 +41,13 @@ class Sprite {
   update(ctx) {
     throw new Error("Abstract method must be implemented");
   }
+
+  /**
+   * Assigns a random color to this block.
+   */
+  setRandomColor() {
+    let rand = Math.floor(Math.random() * (Object.keys(COLOR).length - 1));
+    this.color = Object.values(COLOR)[rand + 1];
+    return this;
+  }
 }

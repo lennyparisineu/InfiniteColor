@@ -9,7 +9,7 @@ class ModuleManager {
   constructor() {
     this.activeModules = [];
     this.initPool();
-    this.createStartingFloor(5);
+    this.createStartingFloor(3);
   }
 
   /**
@@ -34,8 +34,7 @@ class ModuleManager {
 
     // add the modules to the pool
     this.pool.push(floor);
-    this.pool.push(MODULE_1);
-    this.pool.push(MODULE_3);
+    this.pool = this.pool.concat(ALL_MODULES);
   }
 
   /**
@@ -85,14 +84,13 @@ class ModuleManager {
       module.update(ctx);
       if (module.isCompletelyOutOfView()) {
         this.activeModules.splice(i, 1);
-        console.log("Removing module " + i);
+        console.log("Removing module ");
         --i;
       } else if (
         i == this.activeModules.length - 1 &&
         !module.alreadyTriggeredModuleSpawn &&
         module.isCompletelyInView()
       ) {
-        console.log("Adding new module ");
         module.alreadyTriggeredModuleSpawn = true;
         this.createModuleInstance();
       }
@@ -144,6 +142,7 @@ class ModuleManager {
    */
   createModuleInstance() {
     let index = Math.round(Math.random() * (this.pool.length - 1));
+    console.log("Adding module: " + (index - 1));
     this.copyFromPool(index, SCREEN_WIDTH + BLOCK_SIZE);
   }
 }

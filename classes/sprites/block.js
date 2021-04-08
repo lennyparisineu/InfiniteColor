@@ -15,17 +15,6 @@ class Block extends Sprite {
   }
 
   /**
-   * Sets the color of this block
-   *
-   * @param {COLOR} color sets this block's color
-   * @returns this
-   */
-  setColor(color) {
-    this.color = color;
-    return this;
-  }
-
-  /**
    * Sets the dimensions of this block
    *
    * @param {number} width the new width

@@ -58,7 +58,7 @@ function parseLine(line, i) {
   const wallHeight = `BLOCK_SIZE * 5`;
   let xVal = (x) => `BLOCK_SIZE * ${x}`;
   let yVal = (isWall) =>
-    `(canvas.clientHeight / 2) - (2 * BLOCK_SIZE) + (${i} * 3 * BLOCK_SIZE) ${
+    `(canvas.clientHeight / 2) - (BLOCK_SIZE) + (${i} * 2 * BLOCK_SIZE) ${
       isWall ? `- ${wallHeight} + BLOCK_SIZE` : ""
     }`;
   for (let x = 0; x < line.length; ++x) {

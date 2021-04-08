@@ -112,7 +112,10 @@ class Player extends Block {
    * @returns {boolean} whether or not the colors are different
    */
   colorsAreDifferent(obstacle) {
-    return obstacle.color !== COLOR.DEFAULT && obstacle.color === this.color;
+    return (
+      obstacle.color.start !== COLOR.DEFAULT.start &&
+      obstacle.color.start === this.color.start
+    );
   }
 
   /**
