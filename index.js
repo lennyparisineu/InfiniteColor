@@ -6,6 +6,7 @@
  * - Collision with spike is janky
  * - Gap between collision
  * - If player lands directly on a corner of a platform, it counts as a 'right' col
+ * - PLayer doesn't get pushed to the left since the bot collision takes priority?
  */
 
 const canvas = document.getElementById("canvas");
