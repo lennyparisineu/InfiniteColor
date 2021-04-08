@@ -44,13 +44,18 @@ class Spike extends Sprite {
   collidedWith(otherSprite, xOffset) {
     if (
       otherSprite.x <= this.x + xOffset + this.width &&
-      otherSprite.x + otherSprite.width >= this.x + xOffset &&
-      otherSprite.y <= this.y + this.height &&
-      otherSprite.y + otherSprite.height >= this.y
+      otherSprite.x + otherSprite.width >= this.x + xOffset
     ) {
-      return this;
-    } else {
-      return null;
+      let deltaX =
+        this.x + xOffset + this.width / 2 - (otherSprite.x + otherSprite.width);
+
+      let factor = deltaX / (this.width / 2);
+      let maxHeight = this.height * factor;
+
+      if (otherSprite.y + otherSprite.height > this.y + maxHeight) {
+        return this;
+      }
     }
+    return null;
   }
 }
