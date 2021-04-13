@@ -115,9 +115,12 @@ class ModuleManager {
     // change it to the next update's potential location
     player.y -= player.velocity;
 
+    console.log("check")
     // check for collisions
     for (let i = 0; i < this.activeModules.length; ++i) {
       collision = this.activeModules[i].collidedWith(player);
+      console.log(collision)
+      console.log(player)
       if (collision != null) {
         collided = player.onCollision(collision, this.activeModules[i].x);
         collidedOnce = true;

@@ -35,6 +35,7 @@ class Player extends Block {
     }
 
     if (!this.isInView(0)) {
+      console.log("player.js 38")
       this.isDead = true;
     }
 
@@ -70,6 +71,7 @@ class Player extends Block {
    * if it shoudl count as a collision, and what to do if it does.
    *
    * @param {Sprite} obstacle the obstacle this player collided with
+   * @param xOffset TODO define xOffset
    * @returns {boolean} whether or not the obstacle should count as a collision
    */
   onCollision(obstacle, xOffset) {
@@ -77,28 +79,34 @@ class Player extends Block {
     if (!this.colorsAreDifferent(obstacle)) {
       // if the obstacle is a killer, then kill the player
       if (obstacle.type === TYPE.KILLER) {
-        this.isDead = true;
-
-        // otherwise if the obstacle is a platform
-      } else if (obstacle.type === TYPE.BLOCK) {
-        // TODO -- improve this
-        // if the top of the player is hitting the obstacle
-        if (this.y >= obstacle.y + obstacle.height - obstacle.height * 0.5) {
-          // the player is not teleported
-          this.isGrounded = false;
-          this.x = obstacle.x + xOffset - this.width;
-          // if the bottom of the player is touching/inside of the obstacle
-        } else if (this.y + this.height <= obstacle.y + obstacle.height * 0.5) {
-          // fix the player's bottom to be the top of the obstacle
-          this.y = obstacle.y;
-          // make the player grounded
-          this.isGrounded = true;
-          // reset velocity to 0
-          this.velocity = 0;
-          // and reset jumpsLeft
-          this.jumpsLeft = MAX_JUMPS;
+        if (Math.abs(this.y - obstacle.y) < BLOCK_SIZE) {
+          this.isDead = true;
         }
-        return true;
+        // otherwise if the obstacle is a platform
+      }
+      else if (obstacle.type === TYPE.BLOCK && !obstacle.is_wall) {
+        if (Math.abs(this.y - obstacle.y) < BLOCK_SIZE) {
+          // TODO -- improve this
+          // if the top of the player is hitting the obstacle
+          if (this.y > obstacle.y + obstacle.height)  //- obstacle.height * 0.5)
+          {
+            // the player is not teleported
+            this.isGrounded = false;
+            this.x = obstacle.x + xOffset - this.width;
+            // if the bottom of the player is touching/inside of the obstacle
+          } else if (this.y <= obstacle.y + obstacle.height) // * 0.2) //else if (this.y + this.height <= obstacle.y + obstacle.height * 0.5)
+          {
+            // fix the player's bottom to be the top of the obstacle
+            this.y = obstacle.y + obstacle.height;
+            // make the player grounded
+            this.isGrounded = true;
+            // reset velocity to 0
+            this.velocity = 0;
+            // and reset jumpsLeft
+            this.jumpsLeft = MAX_JUMPS;
+          }
+          return true;
+        }
       }
     }
 
