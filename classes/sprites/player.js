@@ -1,7 +1,7 @@
 /**
  * Represents the player's block.
  */
-class Player extends Block {
+class Player extends Sprite {
   /**
    * Constructs a Player at the given position with a starting default color and size of
    * constant BLOCK_SIZE.
@@ -35,7 +35,7 @@ class Player extends Block {
     }
 
     if (!this.isInView(0)) {
-      console.log("player.js 38")
+      console.log("player.js 38");
       this.isDead = true;
     }
 
@@ -64,53 +64,6 @@ class Player extends Block {
   fall() {
     this.y -= this.velocity;
     this.velocity += this.acceleration;
-  }
-
-  /**
-   * Gets called when this player collides with an obstacle.This method applies additional logic to determine
-   * if it shoudl count as a collision, and what to do if it does.
-   *
-   * @param {Sprite} obstacle the obstacle this player collided with
-   * @param xOffset TODO define xOffset
-   * @returns {boolean} whether or not the obstacle should count as a collision
-   */
-  onCollision(obstacle, xOffset) {
-    // if the player's color does not match the obstacle, then it should likely count as a collision
-    if (!this.colorsAreDifferent(obstacle)) {
-      // if the obstacle is a killer, then kill the player
-      if (obstacle.type === TYPE.KILLER) {
-        if (Math.abs(this.y - obstacle.y) < BLOCK_SIZE) {
-          this.isDead = true;
-        }
-        // otherwise if the obstacle is a platform
-      }
-      else if (obstacle.type === TYPE.BLOCK && !obstacle.is_wall) {
-        if (Math.abs(this.y - obstacle.y) < BLOCK_SIZE) {
-          // TODO -- improve this
-          // if the top of the player is hitting the obstacle
-          if (this.y > obstacle.y + obstacle.height)  //- obstacle.height * 0.5)
-          {
-            // the player is not teleported
-            this.isGrounded = false;
-            this.x = obstacle.x + xOffset - this.width;
-            // if the bottom of the player is touching/inside of the obstacle
-          } else if (this.y <= obstacle.y + obstacle.height) // * 0.2) //else if (this.y + this.height <= obstacle.y + obstacle.height * 0.5)
-          {
-            // fix the player's bottom to be the top of the obstacle
-            this.y = obstacle.y + obstacle.height;
-            // make the player grounded
-            this.isGrounded = true;
-            // reset velocity to 0
-            this.velocity = 0;
-            // and reset jumpsLeft
-            this.jumpsLeft = MAX_JUMPS;
-          }
-          return true;
-        }
-      }
-    }
-
-    return false;
   }
 
   /**

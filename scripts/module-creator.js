@@ -38,6 +38,11 @@ async function processLineByLine() {
   console.log(`Created ${modules.length} modules.`);
 }
 
+/**
+ * TODO -- fix to work with walls, floors, and spikes rather than old BLock().setDimension()
+ * @param {*} modules
+ * @param {*} module
+ */
 async function createModule(modules, module) {
   // create new module
   let out = ``;

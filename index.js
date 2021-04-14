@@ -49,7 +49,6 @@ const keyColorDict = {
 };
 
 // here is where we would process key input
-// TODO -- implement color changes based on key presses.
 function checkKey(e) {
   e = e || window.event;
 

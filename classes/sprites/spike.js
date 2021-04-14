@@ -1,7 +1,7 @@
 /**
  * Represents a killer Spike.
  */
-class Spike extends Sprite {
+class Spike extends GameObject {
   /**
    * Constructs a Spike at the given position with the given color and size of
    * constant BLOCK_SIZE.
@@ -18,6 +18,7 @@ class Spike extends Sprite {
   /**
    * Renders this sprite onto the canvas.
    *
+   * @override
    * @param {CanvasContext} ctx the canvas' context
    * @param {number} xOffset how much to offset this block's x position by
    */
@@ -53,27 +54,39 @@ class Spike extends Sprite {
     ctx.stroke();
   }
 
-  // TODO -- fix this for better collision detection. Right now it's the same logic
-  // as the square's collision detection function
-
   /**
-   * Did this sprite collide with the other sprite?
+   * Gets called when this object collides with the player.
+   * Kills the player on collision.
    *
    * @override
-   * @param {Sprite} otherSprite a sprite to check collisions for
-   * @returns {Sprite} if it did collide with the other sprite, return the object that the other sprite collided with
+   * @param {*} player
+   * @param {*} xOffset
+   */
+  collidedWithPlayer(player, xOffset) {
+    if (player.colorsAreDifferent(this) && this.collidedWith(player, xOffset)) {
+      player.isDeath = true;
+    }
+  }
+
+  /**
+   * Dos this spike colliede with the player?
+   *
+   * TODO -- fix
+   *
+   * @override
+   * @param {*} otherSprite
+   * @param {*} xOffset
+   * @returns
    */
   collidedWith(otherSprite, xOffset) {
-    let deltaX = Math.abs(
-      this.x + xOffset + this.width / 2 - (otherSprite.x + otherSprite.width)
-    );
-
-    let factor = deltaX / (this.width / 2);
-    let maxHeight = this.height * factor;
-
-    if (otherSprite.y + otherSprite.height > this.y + maxHeight) {
-      return this;
-    }
-    return null;
+    // let deltaX = Math.abs(
+    //   this.x + xOffset + this.width / 2 - (otherSprite.x + otherSprite.width)
+    // );
+    // let factor = deltaX / (this.width / 2);
+    // let maxHeight = this.height * factor;
+    // if (otherSprite.y + otherSprite.height > this.y + maxHeight) {
+    //   return this;
+    // }
+    // return null;
   }
 }

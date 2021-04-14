@@ -52,8 +52,9 @@ const COLOR = Object.freeze({
 });
 
 const TYPE = Object.freeze({
-  BLOCK: 0,
-  KILLER: 1,
-  PLAYER: 2,
-  MODULE: 3,
+  FLOOR: 0,
+  WALL: 1,
+  SPIKE: 2,
+  PLAYER: 3,
+  MODULE: 4,
 });

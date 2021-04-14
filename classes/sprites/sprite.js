@@ -50,4 +50,36 @@ class Sprite {
     this.color = Object.values(COLOR)[rand + 1];
     return this;
   }
+
+  /**
+   * Renders this sprite onto the canvas.
+   *
+   * @param {CanvasContext} ctx the canvas' context (for drawing)
+   * @param {number} xOffset how much to offset this block's x position by
+   */
+  render(ctx, xOffset) {
+    let grd = ctx.createLinearGradient(
+      this.x + xOffset,
+      this.y,
+      this.x + xOffset,
+      this.y + this.height
+    );
+    grd.addColorStop(0, this.color.start);
+    grd.addColorStop(1, this.color.end);
+
+    ctx.fillStyle = grd;
+    ctx.fillRect(this.x + xOffset, this.y, this.width, this.height);
+    grd = ctx.createLinearGradient(
+      this.x + xOffset,
+      this.y,
+      this.x + xOffset,
+      this.y + this.height
+    );
+
+    let gradients = Object.keys(this.color.border);
+    gradients.forEach((x) => grd.addColorStop(x, this.color.border[x]));
+    ctx.strokeStyle = grd;
+    ctx.lineWidth = PLATFORM_BORDER_WIDTH;
+    ctx.strokeRect(this.x + xOffset, this.y, this.width, this.height);
+  }
 }
