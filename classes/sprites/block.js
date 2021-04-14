@@ -12,6 +12,7 @@ class Block extends Sprite {
   constructor(x, y) {
     super(x, y, BLOCK_SIZE, BLOCK_SIZE, TYPE.BLOCK);
     this.color = COLOR.DEFAULT;
+    this.is_wall = false;
   }
 
   /**
@@ -22,6 +23,9 @@ class Block extends Sprite {
    * @returns this
    */
   setDimensions(width, height) {
+    if (height > BLOCK_SIZE) {
+      this.is_wall = true;
+    }
     this.width = width;
     this.height = height;
     return this;
@@ -77,5 +81,9 @@ class Block extends Sprite {
     } else {
       return null;
     }
+  }
+
+  isWall() {
+    return this.is_wall;
   }
 }
