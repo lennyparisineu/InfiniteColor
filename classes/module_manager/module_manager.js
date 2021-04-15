@@ -104,16 +104,21 @@ class ModuleManager {
   checkForPlayerCollisions(player) {
     let collision;
 
+    player.update();
+
     // check for collisions
     for (let i = 0; i < this.activeModules.length; ++i) {
-      collision = this.activeModules[i].collidedWith(player);
+      collision = this.activeModules[i].collidedWith(
+        player,
+        this.activeModules[i].x
+      );
       if (collision != null) {
         collision.collidedWithPlayer(player, this.activeModules[i].x);
       }
     }
 
     // update the player
-    player.update(ctx);
+    player.render(ctx, 0);
   }
 
   /**

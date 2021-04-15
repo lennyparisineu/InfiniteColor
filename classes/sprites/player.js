@@ -25,18 +25,22 @@ class Player extends Sprite {
    * 3. Renders the player.
    *
    * @override
-   * @param {CanvasContext} ctx the canvas' context (used to draw)
    */
-  update(ctx) {
-    if (!this.isGrounded) {
-      this.fall();
-    }
+  update() {
+    this.fall();
 
     if (!this.isInView(0)) {
       this.isDead = true;
     }
+  }
 
-    this.render(ctx, 0);
+  /**
+   * Grounds the player
+   */
+  ground() {
+    player.isGrounded = true;
+    player.velocity = 0;
+    this.jumpsLeft = MAX_JUMPS;
   }
 
   /**
@@ -72,8 +76,8 @@ class Player extends Sprite {
    */
   colorsAreDifferent(obstacle) {
     return (
-      obstacle.color.start !== COLOR.DEFAULT.start &&
-      obstacle.color.start === this.color.start
+      obstacle.color.start === COLOR.DEFAULT.start ||
+      obstacle.color.start !== this.color.start
     );
   }
 
@@ -83,6 +87,8 @@ class Player extends Sprite {
   jump() {
     if (this.jumpsLeft > 0) {
       this.velocity = PLAYER_JUMP_SPEED;
+      this.y -= this.velocity;
+      this.isGrounded = false;
       --this.jumpsLeft;
     }
   }

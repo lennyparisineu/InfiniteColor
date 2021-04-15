@@ -17,12 +17,13 @@ class Wall extends GameObject {
    * Gets called when this object collides with the player.
    * Allows the player to go through it, otherwise push the player to the left.
    *
+   * TODO -- figure out why collision with wall isnt detected when player is on the floor
+   *
    * @override
    * @param {*} player
-   * @param {*} xOffset
    */
-  collidedWithPlayer(player, xOffset) {
-    if (this.collidedWith(player, xOffset) && player.colorsAreDifferent(this)) {
+  collidedWithPlayer(player) {
+    if (player.colorsAreDifferent(this)) {
       player.isDead = true;
     }
   }

@@ -16,12 +16,15 @@ class Floor extends GameObject {
   collidedWithPlayer(player, xOffset) {
     if (player.colorsAreDifferent(this)) {
       // if bottom of player is touching
-      // player.isGrounded
-      // player.y = this.y - this.height
-      //
+      if (
+        player.y + player.height >= this.y &&
+        player.y + player.height <= this.y + this.height * 0.75
+      ) {
+        player.ground();
+        player.y = this.y - this.height;
+      }
       // if top of player is touching
-      // player.isGrounded = false
-      // player.y = this.y + this.height
+      // player.y = this.y  + this.height
     }
   }
 }
