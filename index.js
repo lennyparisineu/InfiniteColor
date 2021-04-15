@@ -14,7 +14,8 @@ const SCREEN_HEIGHT = canvas.clientHeight;
 const ctx = canvas.getContext("2d");
 const player = new Player(
   BLOCK_SIZE * 2,
-  canvas.clientHeight / 2 - BLOCK_SIZE / 2
+  canvas.clientHeight / 2 - BLOCK_SIZE / 2,
+  canvas.clientHeight
 );
 const moduleManager = new ModuleManager();
 

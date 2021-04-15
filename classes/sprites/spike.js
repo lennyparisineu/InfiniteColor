@@ -10,9 +10,9 @@ class Spike extends GameObject {
    * @param {number} y starting y position
    * @param {COLOR | undefined} color starting color
    */
-  constructor(x, y, color) {
+  constructor(x, y) {
     super(x, y, BLOCK_SIZE, BLOCK_SIZE, TYPE.KILLER);
-    this.color = color ? color : COLOR.DEFAULT;
+    this.color = COLOR.DEFAULT;
   }
 
   /**

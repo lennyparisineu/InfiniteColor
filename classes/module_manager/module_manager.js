@@ -22,11 +22,11 @@ class ModuleManager {
     // =================== cringe hard-code zone =============
     const floor = new Module(
       [
-        new Block(BLOCK_SIZE * 1, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 2, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 3, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 4, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 5, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 1, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 2, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 3, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 4, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 5, canvas.clientHeight / 2 + BLOCK_SIZE),
       ],
       7
     );

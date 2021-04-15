@@ -8,16 +8,14 @@ class Player extends Sprite {
    *
    * @param {number} x starting x position
    * @param {number} y starting y position
-   * @param {number} maxY the max y value the player can be at before going out of bounds
    */
-  constructor(x, y, maxY) {
-    super(x, y, COLOR.DEFAULT, TYPE.PLAYER);
+  constructor(x, y) {
+    super(x, y, BLOCK_SIZE, BLOCK_SIZE, TYPE.PLAYER);
     this.velocity = 0;
     this.acceleration = GRAVITY;
     this.jumpsLeft = MAX_JUMPS;
     this.isGrounded = false;
     this.isDead = false;
-    this.maxY = maxY;
   }
 
   /**
@@ -35,7 +33,6 @@ class Player extends Sprite {
     }
 
     if (!this.isInView(0)) {
-      console.log("player.js 38");
       this.isDead = true;
     }
 
@@ -50,6 +47,7 @@ class Player extends Sprite {
    */
   isInView(xOffset) {
     let rightXPos = xOffset + this.x + this.width;
+
     return (
       rightXPos > 0 &&
       rightXPos < SCREEN_WIDTH &&
