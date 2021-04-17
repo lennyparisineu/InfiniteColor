@@ -102,19 +102,19 @@ class ModuleManager {
    * @param {Player} player The player
    */
   checkForPlayerCollisions(player) {
-    let collision;
+    let collisions;
 
     player.update();
 
     // check for collisions
     for (let i = 0; i < this.activeModules.length; ++i) {
-      collision = this.activeModules[i].collidedWith(
+      collisions = this.activeModules[i].collidedWith(
         player,
         this.activeModules[i].x
       );
-      if (collision != null) {
-        collision.collidedWithPlayer(player, this.activeModules[i].x);
-      }
+      collisions.forEach((collision) =>
+        collision.collidedWithPlayer(player, this.activeModules[i].x)
+      );
     }
 
     // update the player
