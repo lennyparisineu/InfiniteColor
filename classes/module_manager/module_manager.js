@@ -127,5 +127,6 @@ class ModuleManager {
   createModuleInstance() {
     let index = Math.round(Math.random() * (this.pool.length - 1));
     this.copyFromPool(index, SCREEN_WIDTH + BLOCK_SIZE);
+    console.log("Adding module  " + index);
   }
 }
