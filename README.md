@@ -5,6 +5,9 @@ You need to change color to go through walls and get as far as you can. Please n
 ## Controls 
 
 Q - Red
+
 W - Green
+
 E - Blue
+
 Space - Jump
