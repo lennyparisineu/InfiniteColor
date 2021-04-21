@@ -69,9 +69,7 @@ class Spike extends GameObject {
   }
 
   /**
-   * Dos this spike colliede with the player?
-   *
-   * TODO -- fix
+   * Dos this spike collide with the player?
    *
    * @override
    * @param {*} otherSprite
@@ -79,14 +77,25 @@ class Spike extends GameObject {
    * @returns
    */
   collidedWith(otherSprite, xOffset) {
-    // let deltaX = Math.abs(
-    //   this.x + xOffset + this.width / 2 - (otherSprite.x + otherSprite.width)
-    // );
-    // let factor = deltaX / (this.width / 2);
-    // let maxHeight = this.height * factor;
-    // if (otherSprite.y + otherSprite.height > this.y + maxHeight) {
-    //   return this;
-    // }
-    // return null;
+    if (super.collidedWith(otherSprite, xOffset)) {
+      let deltaX =
+        this.x +
+        xOffset +
+        this.width / 2 -
+        (otherSprite.x + otherSprite.width / 2);
+
+      if (deltaX > 0) {
+        deltaX += otherSprite.width / 2;
+      } else {
+        deltaX -= otherSprite.width / 2;
+      }
+
+      let factor = this.width / 2 / Math.abs(deltaX);
+      let maxHeight = this.height * factor;
+      if (otherSprite.y + otherSprite.height > this.y + maxHeight) {
+        return this;
+      }
+    }
+    return null;
   }
 }

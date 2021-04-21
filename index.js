@@ -44,9 +44,9 @@ function update() {
 
 // dictionary that maps keys to colors that player can change into
 const keyColorDict = {
-  82: COLOR.RED, // r
-  71: COLOR.GREEN, // g
-  66: COLOR.BLUE, // b
+  81: COLOR.RED, // q
+  87: COLOR.GREEN, // w
+  69: COLOR.BLUE, // e
 };
 
 // here is where we would process key input

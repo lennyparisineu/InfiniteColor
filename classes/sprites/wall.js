@@ -10,14 +10,12 @@ class Wall extends GameObject {
    * @param {number} y starting y position
    */
   constructor(x, y) {
-    super(x, y, BLOCK_SIZE, BLOCK_SIZE * 5, TYPE.WALL);
+    super(x, y, BLOCK_SIZE, BLOCK_SIZE * 3, TYPE.WALL);
   }
 
   /**
    * Gets called when this object collides with the player.
    * Allows the player to go through it, otherwise push the player to the left.
-   *
-   * TODO -- figure out why collision with wall isnt detected when player is on the floor
    *
    * @override
    * @param {*} player

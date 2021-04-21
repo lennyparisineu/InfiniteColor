@@ -59,7 +59,7 @@ async function createModule(modules, module) {
 function parseLine(line, i) {
   let out = ``;
   let curChar;
-  const wallHeight = `BLOCK_SIZE * 5`;
+  const wallHeight = `BLOCK_SIZE * 3`;
   let xVal = (x) => `BLOCK_SIZE * ${x}`;
   let yVal = (offset) =>
     `(canvas.clientHeight / 2) - (BLOCK_SIZE) + (${i} * 2 * BLOCK_SIZE) ${
