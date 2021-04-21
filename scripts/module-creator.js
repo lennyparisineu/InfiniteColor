@@ -59,7 +59,7 @@ async function createModule(modules, module) {
 function parseLine(line, i) {
   let out = ``;
   let curChar;
-  const wallHeight = `BLOCK_SIZE * 5`;
+  const wallHeight = `BLOCK_SIZE * 3`;
   let xVal = (x) => `BLOCK_SIZE * ${x}`;
   let yVal = (offset) =>
     `(canvas.clientHeight / 2) - (BLOCK_SIZE) + (${i} * 2 * BLOCK_SIZE) ${
@@ -69,22 +69,14 @@ function parseLine(line, i) {
     curChar = line[x];
     switch (curChar) {
       case "=":
-        out += `new Block(${xVal(x)}, ${yVal()}),`;
+        out += `new Floor(${xVal(x)}, ${yVal()}),`;
         break;
       case "c":
-        out += `new Block(${xVal(x)}, ${yVal(wallHeight)})
-                    .setRandomColor()
-                    .setDimensions(BLOCK_SIZE, ${wallHeight} ),new Block(${xVal(
-          x
-        )}, ${yVal()}),`;
-        break;
-      case "_":
-        out += `new Block(${xVal(x)}, ${yVal(wallHeight + ` + BLOCK_SIZE`)})
-                      .setRandomColor()
-                      .setDimensions(BLOCK_SIZE, BLOCK_SIZE ),`;
+        out += `new Wall(${xVal(x)}, ${yVal(wallHeight)})
+                    .setRandomColor(),new Floor(${xVal(x)}, ${yVal()}),`;
         break;
       case "^":
-        out += `new Spike(${xVal(x)}, ${yVal(`BLOCK_SIZE`)}), new Block(${xVal(
+        out += `new Spike(${xVal(x)}, ${yVal(`BLOCK_SIZE`)}), new Floor(${xVal(
           x
         )}, ${yVal()}),`;
         break;

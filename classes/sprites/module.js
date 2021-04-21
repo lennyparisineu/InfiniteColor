@@ -33,14 +33,16 @@ class Module {
    * @returns {Sprite} if it did collide with the other sprite, return the object that the other sprite collided with
    */
   collidedWith(otherSprite) {
+    let collisions = [];
     let collision;
+
     for (let i = 0; i < this.sprites.length; ++i) {
       collision = this.sprites[i].collidedWith(otherSprite, this.x);
       if (collision != null) {
-        return collision;
+        collisions.push(collision);
       }
     }
-    return null;
+    return collisions;
   }
 
   /**

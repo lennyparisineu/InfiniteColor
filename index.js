@@ -14,7 +14,8 @@ const SCREEN_HEIGHT = canvas.clientHeight;
 const ctx = canvas.getContext("2d");
 const player = new Player(
   BLOCK_SIZE * 2,
-  canvas.clientHeight / 2 - BLOCK_SIZE / 2
+  canvas.clientHeight / 2 - BLOCK_SIZE / 2,
+  canvas.clientHeight
 );
 const moduleManager = new ModuleManager();
 
@@ -43,13 +44,12 @@ function update() {
 
 // dictionary that maps keys to colors that player can change into
 const keyColorDict = {
-  82: COLOR.RED, // r
-  71: COLOR.GREEN, // g
-  66: COLOR.BLUE, // b
+  81: COLOR.RED, // q
+  87: COLOR.GREEN, // w
+  69: COLOR.BLUE, // e
 };
 
 // here is where we would process key input
-// TODO -- implement color changes based on key presses.
 function checkKey(e) {
   e = e || window.event;
 

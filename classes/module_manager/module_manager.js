@@ -15,7 +15,6 @@ class ModuleManager {
   /**
    * Initializes the pool of modules.
    *
-   * TODO -- clean this up so its not as hard-coded and messy.
    */
   initPool() {
     this.pool = [];
@@ -23,11 +22,11 @@ class ModuleManager {
     // =================== cringe hard-code zone =============
     const floor = new Module(
       [
-        new Block(BLOCK_SIZE * 1, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 2, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 3, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 4, canvas.clientHeight / 2 + BLOCK_SIZE),
-        new Block(BLOCK_SIZE * 5, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 1, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 2, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 3, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 4, canvas.clientHeight / 2 + BLOCK_SIZE),
+        new Floor(BLOCK_SIZE * 5, canvas.clientHeight / 2 + BLOCK_SIZE),
       ],
       7
     );
@@ -100,46 +99,26 @@ class ModuleManager {
   /**
    * Check collisions between the player and all active modules.
    *
-   * TODO -- fix this for better collision detection/responsiveness.
-   *
    * @param {Player} player The player
    */
   checkForPlayerCollisions(player) {
-    let collided = false;
-    let collidedOnce = false;
-    let collision;
+    let collisions;
 
-    // save temp ref to player's original Y
-    const playerY = player.y;
+    player.update();
 
-    // change it to the next update's potential location
-    player.y -= player.velocity;
-
-    console.log("check")
     // check for collisions
     for (let i = 0; i < this.activeModules.length; ++i) {
-      collision = this.activeModules[i].collidedWith(player);
-      console.log(collision)
-      console.log(player)
-      if (collision != null) {
-        collided = player.onCollision(collision, this.activeModules[i].x);
-        collidedOnce = true;
-        // if a collision was truly detected, revert back to original position to prevent/reduce clipping
-        if (collided) {
-          player.y = playerY;
-        }
-      }
-    }
-
-    // if there were no collisions
-    if (!collidedOnce) {
-      // make the player fall and not be grounded
-      player.isGrounded = false;
-      player.y += player.velocity;
+      collisions = this.activeModules[i].collidedWith(
+        player,
+        this.activeModules[i].x
+      );
+      collisions.forEach((collision) =>
+        collision.collidedWithPlayer(player, this.activeModules[i].x)
+      );
     }
 
     // update the player
-    player.update(ctx);
+    player.render(ctx, 0);
   }
 
   /**
@@ -147,7 +126,7 @@ class ModuleManager {
    */
   createModuleInstance() {
     let index = Math.round(Math.random() * (this.pool.length - 1));
-    console.log("Adding module: " + (index - 1));
     this.copyFromPool(index, SCREEN_WIDTH + BLOCK_SIZE);
+    console.log("Adding module  " + index);
   }
 }
