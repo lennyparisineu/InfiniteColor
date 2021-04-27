@@ -36,8 +36,8 @@
             ==c===
 # Module 10 – tiny platfocms
        ===
-===                =c=      =c=      =c=      =c=      =c=
-              ===
+===           ===     =c=      =c=      =c=      =c=      =c=
+
 # Module 11 – spike, switch, spike
 
 ===^^^===c===c===c===^^^===
