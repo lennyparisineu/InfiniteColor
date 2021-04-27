@@ -1,80 +1,80 @@
-# Module 1 – 3 jumps with clue wall 
+# Module 1 – 3 jumps with clue wall
 
-======   ====c=====    ========= 
+======   ====c=====    =========
 
-# Module 2 – spiky ccound 1 
+# Module 2 – spiky ccound 1
 
-====^==^===^==^====^==^===^^^==^=== 
+====^==^===^==^====^==^===^^^==^===
 
-# Module 3 – quick walls switch 
+# Module 3 – quick walls switch
 
-===c==c==c==c==c=== 
+===c==c==c==c==c===
 
-# Module 4 – switches and jumps 
+# Module 4 – switches and jumps
 
-===c==   ==c==   ==c==   ==c==^^==c=== 
+===c==   ==c==   ==c==   ==c==^^==c===
 
-# Module 5 – spiky ccound 2 
+# Module 5 – spiky ccound 2
 
-===^===^^===^^^===          ===c=== 
-                   ====^^=== 
-# Module  6 – up and down 1 
-          ===c==  
+===^===^^===^^^===          ===c===
+                   ====^^===
+# Module  6 – up and down 1
+          ===c==
 ===c===            ===c==               ===c==
-                              ====c== 
-# Module 7 – spikes and switches 
+                              ====c==
+# Module 7 – spikes and switches
 
-===c^===c^===c^===c^^===c^^^=== 
+===c^===c^===c^===c^^===c^^^===
 
-# Module 8 -  quick walls switch 2 
+# Module 8 -  quick walls switch 2
 
-===c===c===c===c===c==c=== 
+===c===c===c===c===c==c===
 
-# Module 9 – up and down 2 
-          ===^^=== 
+# Module 9 – up and down 2
+          ===^^===
 ===c===               ===c===      ===c===
-            ==c=== 
-# Module 10 – tiny platfocms 
-       === 
+            ==c===
+# Module 10 – tiny platfocms
+       ===
 ===                =c=      =c=      =c=      =c=      =c=
               ===
-# Module 11 – spike, switch, spike 
+# Module 11 – spike, switch, spike
 
-===^^^===c===c===c===^^^=== 
+===^^^===c===c===c===^^^===
 
-# Module 12 – switch, spike, switch 
+# Module 12 – switch, spike, switch
 
-===c==c==c==^^===^^==c==c==c=== 
+===c==c==c==^^===^^==c==c==c===
 
-# Module 13 – moce platfocminc 
+# Module 13 – moce platfocminc
            ====               ===^^^===    ==^===
 ===c===            ===c===                              ===c===
 
-# Module 14 – choose youc path 
+# Module 14 – choose youc path
        ====c===c===c===c==^^==c===c==
 ====                                    ====
        ===^===^^===^^^===^^==^==c====
-# Module 15 – simple 
+# Module 15 – simple
 
-========^^====c=====^^========== 
+========^^====c=====^^==========
 
-# Module 16 – tiny platfocm switches 
+# Module 16 – tiny platfocm switches
 
-===    =c=    ===    =c=    ===    =c=    === 
+===    =c=    ===    =c=    ===    =c=    ===
 
-# Module 17 – some tcaps 
-             =^^^^=                     ====== 
-====   ====          =====    ===^^=== 
-           =======                   =^^^^= 
-# Module 18 – spikefield 
+# Module 17 – some tcaps
+             =^^^^=                     ======
+====   ====          =====    ===^^===
+           =======                   =^^^^=
+# Module 18 – spikefield
 
-===^^^==^^===^^===^^==^^^==^^=== 
+===^^^==^^===^^===^^==^^^==^^===
 
-# Module 19 – spikes, switches, and jumps 
+# Module 19 – spikes, switches, and jumps
 
-===             ==c^==    ==c^==   ==c^==    ==c^^==      === 
-   ====c^^=== 
-# Module 20 – cic leap 
+===             ==c^==    ==c^==   ==c^==    ==c^^==      ===
+   ====c^^===
+# Module 20 – cic leap
         =====c==^^==c==
 ===                                                  ===
                                ===^^===^^===

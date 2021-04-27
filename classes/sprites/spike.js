@@ -63,9 +63,9 @@ class Spike extends GameObject {
    * @param {*} xOffset
    */
   collidedWithPlayer(player, xOffset) {
-    if (player.colorsAreDifferent(this) && this.collidedWith(player, xOffset)) {
-      player.isDeath = true;
-    }
+    //if (player.colorsAreDifferent(this) && this.collidedWith(player, xOffset)) {
+      player.isDead = true;
+    //}
   }
 
   /**
