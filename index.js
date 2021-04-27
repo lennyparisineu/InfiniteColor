@@ -20,15 +20,16 @@ const player = new Player(
 const moduleManager = new ModuleManager();
 
 let gameIsOver = false;
+let score = 0;
 
 window.setInterval(update, REFRESH_RATE);
 document.onkeydown = checkKey;
 
 function update() {
+  // clear the screen
+  ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+  ctx.clear;
   if (!gameIsOver) {
-    // clear the screen
-    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-    ctx.clear;
     drawBackground();
 
     // update the game
@@ -39,6 +40,10 @@ function update() {
       gameIsOver = true;
       console.log("game over");
     }
+    score += REFRESH_RATE / 1000;
+    drawScore();
+  } else {
+    restartMenu();
   }
 }
 
@@ -52,6 +57,10 @@ const keyColorDict = {
 // here is where we would process key input
 function checkKey(e) {
   e = e || window.event;
+
+  if (player.isDead) {
+    window.location.reload();
+  }
 
   let keys = Object.keys(keyColorDict);
   for (let i = 0; i < keys.length; ++i) {
@@ -82,4 +91,25 @@ function drawBackground() {
   }
   bg1x -= BACKGROUND_SCROLL_SPEED;
   bg2x -= BACKGROUND_SCROLL_SPEED;
+}
+
+function drawScore() {
+  ctx.fillStyle = "white";
+  ctx.font = "25px serif";
+  ctx.fillText("Score: " + score.toPrecision(2), 20, 30);
+}
+
+function restartMenu() {
+  ctx.font = "25px serif";
+  ctx.fillStyle = "white";
+  ctx.fillText(
+    "Press any button to restart.",
+    SCREEN_WIDTH / 3,
+    SCREEN_HEIGHT / 2
+  );
+  ctx.fillText(
+    "Final Score: " + score.toPrecision(2),
+    SCREEN_WIDTH / 3,
+    SCREEN_HEIGHT / 2 - BLOCK_SIZE
+  );
 }
